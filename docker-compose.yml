@@ -16,8 +16,8 @@ services:
       - db
     volumes:
       - ./backend:/app
-      
-    command: ["sh", "-c", "npx prisma migrate deploy && npm run start"]
+
+    command: ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
   
   frontend:
     build:
