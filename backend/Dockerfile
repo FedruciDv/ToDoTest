@@ -10,7 +10,7 @@ COPY . .
 
 RUN npx prisma generate
 
-RUN npm run build
+RUN npm run build && ls dist/ -a
 
 EXPOSE 8080
 

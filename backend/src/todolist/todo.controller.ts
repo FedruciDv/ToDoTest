@@ -19,6 +19,8 @@ export class ToDoController{
             const create= await this.ToDoService.createToDo(createToDoDTO);
             return new ResponseDTO({create})
         }catch(error){
+            console.log(error);
+            
             throw new HttpException(
                 ResponseDTO.error("error creating todo item"),
                 HttpStatus.UNAUTHORIZED
