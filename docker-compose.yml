@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend: 
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    
+    environment:
+      - DB_URL=postgresql://fedrucidev:fede@db:5432/todolist
+    
+    depends_on:
+      - db
+    volumes:
+    - ./backend:/app
+
+  
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+    - "80:3000"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:13
+    container_name: db
+    environment:
+      POSTGRES_USER: fedrucidev
+      POSTGRES_PASSWORD: fede
+      POSTGRES_DB: todolist
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data: {}
