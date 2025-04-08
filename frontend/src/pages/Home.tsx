@@ -72,11 +72,7 @@ export default function Home(){
                             <td>{item.id}</td>
                             <td>{item.title}</td>
                             <td>{item.completed? "Completato" : "Non completato"}</td>
-                            <td>{`
-                                ${new Date(item.createdAt).getDay()} /
-                                ${new Date(item.createdAt).getMonth()} /
-                                ${new Date(item.createdAt).getFullYear()} 
-                                `}</td>
+                            <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                                 <td>
                                     <button onClick={()=>{handleDeleteTodo(item.id)}}> Elimina </button>
                                     <button onClick={()=>{handleCompleteToDo(item.id)}}> Completa </button>
