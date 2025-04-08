@@ -10,6 +10,7 @@ services:
     
     environment:
       - DB_URL=postgresql://fedrucidev:fede@db:5432/todolist
+      - PORT=8080
     
     depends_on:
       - db
