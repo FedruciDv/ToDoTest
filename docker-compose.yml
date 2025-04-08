@@ -15,7 +15,8 @@ services:
     depends_on:
       - db
     volumes:
-    - ./backend:/app
+      - ./backend:/app
+      
     command: ["sh", "-c", "npx prisma migrate deploy && npm run start"]
   
   frontend:
