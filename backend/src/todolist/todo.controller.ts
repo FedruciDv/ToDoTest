@@ -1,15 +1,19 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { ToDoService } from './todo.service';
 import { CreateToDoDTO } from './dto/create-todo.dto';
 import { ResponseDTO } from 'src/common/dto/response.dto';
 import { CompleteToDoDTO } from './dto/complete-todo.dto';
 import { DeleteToDoDTO } from './dto/delete-todo';
+import { Roles } from 'src/common/decorator/roles.decorator';
+import { RolesGuard } from 'src/common/guard/guard';
 
+@Roles(["user"])
 @Controller('todos')
 export class ToDoController {
   constructor(private readonly ToDoService: ToDoService) {}
 
   @Get()
+
   async getAll() {
     try {
       const todo = await this.ToDoService.findAll();
@@ -23,6 +27,8 @@ export class ToDoController {
   }
 
   @Post('/create')
+  @Roles(["admin"])
+
   async createToDoItem(@Body() createToDoDTO: CreateToDoDTO) {
     try {
       
@@ -38,6 +44,8 @@ export class ToDoController {
   }
 
   @Post('/delete')
+  @Roles(["admin"])
+
   async deleteToDoItem(@Body() deleteToDoDto: DeleteToDoDTO) {
     try {
       const result = await this.ToDoService.removeToDo(deleteToDoDto);
@@ -51,6 +59,8 @@ export class ToDoController {
   }
 
   @Post('/complete')
+  @Roles(["admin"])
+
   async completeToDoItem(@Body() completeToDoDTO: CompleteToDoDTO) {
     try {
 

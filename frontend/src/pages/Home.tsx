@@ -38,7 +38,8 @@ export default function Home(){
         }
     }
     useEffect(()=>{
-        handleGetTodo()
+        handleGetTodo();
+
     },[])
 
     
@@ -88,5 +89,10 @@ export default function Home(){
         <h4>Aggiungi todo</h4>
             <input type="text" value={title}  onChange={(e)=>{setTitle(e.currentTarget.value)}}/>
             <button type="submit" onClick={handleCreateTodo}>Crea</button>
+
+            <h3>Ruolo</h3>
+            <button type="submit" onClick={()=>{localStorage.setItem("role","admin")}}>Admin</button>
+            <button type="submit" onClick={()=>{localStorage.setItem("role","user")}}>Utente</button>
+
     </>)
 }

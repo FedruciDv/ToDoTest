@@ -18,7 +18,7 @@ export async function getAllTodo(): Promise<ToDo[]> {
   }
 export async function deleteTodo(id : number): Promise<ToDo[]> {
     try {
-      const res = await axios.post(`${url}/todos/delete`, {id});
+      const res = await axios.post(`${url}/todos/delete`, {id,role: localStorage.getItem("role") || "user"});
       return res.data.data; 
     } catch (err) {
       throw new Error("Impossibile eiminare item TODO");
@@ -26,7 +26,7 @@ export async function deleteTodo(id : number): Promise<ToDo[]> {
 }
 export async function createTodo(title : string): Promise<ToDo[]> {
     try {
-      const res = await axios.post(`${url}/todos/create`, {title});
+      const res = await axios.post(`${url}/todos/create`, {title, role: localStorage.getItem("role") || "user"});
       return res.data.data; 
     } catch (err) {
       throw new Error("Impossibile eiminare item TODO");
@@ -34,7 +34,7 @@ export async function createTodo(title : string): Promise<ToDo[]> {
 }
 export async function completeToDo(id : number): Promise<ToDo[]> {
     try {
-      const res = await axios.post(`${url}/todos/complete`, {id});
+      const res = await axios.post(`${url}/todos/complete`, {id,role: localStorage.getItem("role") || "user"});
       return res.data.data; 
     } catch (err) {
       throw new Error("Impossibile eiminare item TODO");

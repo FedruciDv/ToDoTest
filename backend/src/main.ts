@@ -12,7 +12,7 @@ async function bootstrap() {
       transform:true
     }
   ))
-  app.useGlobalFilters(new ValidationExceptionFilter(),new HttpExceptionFilter())
+  app.useGlobalFilters(new ValidationExceptionFilter(),new HttpExceptionFilter());
   app.enableCors({
     origin:"http://localhost",
     methods:'GET,POST',
