@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable, NotFoundException} from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateToDoDTO } from "./dto/create-todo.dto";
 import { title } from "process";
@@ -16,10 +16,7 @@ export class ToDoService{
             return await this.prisma.toDoList.findMany();
         }
         catch(error){
-            throw new HttpException(
-                "Error during getting todo",
-                HttpStatus.INTERNAL_SERVER_ERROR
-            )
+            throw new Error("Error during retrieving todos")
         }
         
     }
@@ -35,10 +32,7 @@ export class ToDoService{
             return res
         }
         catch(error){
-            throw new HttpException(
-                "Error creating todo item",
-                HttpStatus.INTERNAL_SERVER_ERROR
-            )
+            throw new Error("Error during creation")
         }
         
     }
@@ -49,17 +43,14 @@ export class ToDoService{
                 where:{
                     id:deleteToDo.id
                 }
-
             });
 
             return res
         }
         catch(error){
-            throw new HttpException(
-                "Error deleting todo item",
-                HttpStatus.INTERNAL_SERVER_ERROR
-            )
-    }
+            throw new Error("Error during deletion")
+
+        }
         
     }
     async completeToDo(completeToDo : CompleteToDoDTO){
@@ -78,11 +69,8 @@ export class ToDoService{
             return res
         }
         catch(error){
-            throw new HttpException(
-                "Error deleting todo item",
-                HttpStatus.INTERNAL_SERVER_ERROR
-            )
-    }
+            throw new Error("Error during completion")
+        }
         
     }
 }
