@@ -39,7 +39,6 @@ export default function Home(){
     }
     useEffect(()=>{
         handleGetTodo();
-
     },[])
 
     
@@ -75,8 +74,8 @@ export default function Home(){
                             <td>{item.completed? "Completato" : "Non completato"}</td>
                             <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                                 <td>
-                                    <button onClick={()=>{handleDeleteTodo(item.id)}}> Elimina </button>
-                                    <button onClick={()=>{handleCompleteToDo(item.id)}}> Completa </button>
+                                    <button onClick={()=>{handleDeleteTodo(item.id);handleGetTodo()}}> Elimina </button>
+                                    <button onClick={()=>{handleCompleteToDo(item.id);handleGetTodo()}}> Completa </button>
                                 </td>
                         </tr>
                      
