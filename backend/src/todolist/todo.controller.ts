@@ -15,10 +15,10 @@ export class ToDoController {
       const todo = await this.ToDoService.findAll();
       return new ResponseDTO(todo);
     } catch (error) {
-      throw new HttpException(
-        ResponseDTO.error('Error retrieving todo items'),
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Unexpected error during completion',
+      }, HttpStatus.FORBIDDEN);
     }
   }
 
@@ -26,14 +26,14 @@ export class ToDoController {
   async createToDoItem(@Body() createToDoDTO: CreateToDoDTO) {
     try {
       
-        const result = await this.ToDoService.createToDo(createToDoDTO);
+      const result = await this.ToDoService.createToDo(createToDoDTO);
       return new ResponseDTO({ result });
     } catch (error) {
-      throw new HttpException(
       
-        ResponseDTO.error('Unexpected error during creation'),
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Unexpected error during completion',
+      }, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -43,11 +43,10 @@ export class ToDoController {
       const result = await this.ToDoService.removeToDo(deleteToDoDto);
       return new ResponseDTO({ result });
     } catch (error) {
-
-      throw new HttpException(
-        ResponseDTO.error('Unexpected error during deletion'),
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Unexpected error during deletion',
+      }, HttpStatus.FORBIDDEN);
     }
   }
 
@@ -59,10 +58,10 @@ export class ToDoController {
       return new ResponseDTO({ result });
 
     } catch (error) {
-      throw new HttpException(
-        ResponseDTO.error('Unexpected error during completion'),
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Unexpected error during completion',
+      }, HttpStatus.FORBIDDEN);
     }
   }
 }

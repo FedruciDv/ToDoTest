@@ -12,16 +12,11 @@ export class ToDoService{
     }
 
     async findAll(){
-        try{
             return await this.prisma.toDoList.findMany();
-        }
-        catch(error){
-            throw new Error("Error during retrieving todos")
-        }
+        
         
     }
     async createToDo(createToDo : CreateToDoDTO){
-        try{
             const res=await this.prisma.toDoList.create({
                 data:{
                     title:createToDo.title
@@ -30,15 +25,11 @@ export class ToDoService{
             });
 
             return res
-        }
-        catch(error){
-            throw new Error("Error during creation")
-        }
+       
         
     }
     async removeToDo(deleteToDo : DeleteToDoDTO){
 
-        try{
             const res= await this.prisma.toDoList.delete({
                 where:{
                     id:deleteToDo.id
@@ -46,16 +37,10 @@ export class ToDoService{
             });
 
             return res
-        }
-        catch(error){
-            throw new Error("Error during deletion")
-
-        }
         
     }
     async completeToDo(completeToDo : CompleteToDoDTO){
 
-        try{
             const res= await this.prisma.toDoList.update({
                 where:{
                     id:completeToDo.id
@@ -67,10 +52,6 @@ export class ToDoService{
             });
 
             return res
-        }
-        catch(error){
-            throw new Error("Error during completion")
-        }
         
     }
 }
