@@ -90,7 +90,7 @@ export default function Home(){
             <input type="text" value={title}  onChange={(e)=>{setTitle(e.currentTarget.value)}}/>
             <button type="submit" onClick={handleCreateTodo}>Crea</button>
 
-            <h3>Ruolo: {localStorage.get("role")=="admin"?"Amministratore":"Utente"}</h3>
+            <h3>Ruolo: {localStorage.getItem("role")=="admin"?"Amministratore":"Utente"}</h3>
             <button type="submit" onClick={()=>{localStorage.setItem("role","admin")}}>Admin</button> 
             <button type="submit" onClick={()=>{localStorage.setItem("role","user")}}>Utente</button>
 
